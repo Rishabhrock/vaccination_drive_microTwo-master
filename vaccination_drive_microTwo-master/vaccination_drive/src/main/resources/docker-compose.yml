@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mymongodb:
+    image: mongo:latest
+    container_name: "mymongodb"
+    ports:
+      - 27017:27017
+  vaccination-record:
+    image: vaccination-record:1.1
+    container_name: vaccination-record
+    ports:
+      - 8092:8092
+    links:
+      - mymongodb
+  employee-record:
+    image: employee-record:1.1
+    container_name: employee-record
+    ports:
+      - 8091:8091
+    links:
+      - mymongodb
+      - vaccination-record
